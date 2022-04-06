@@ -26,8 +26,29 @@ export class User extends Model<User, UserCreationOptions> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   email: string;
 
-  @Column({ type: DataType.STRING, unique: true, allowNull: false })
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  surname: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
   name: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  patronymic: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  birthdate: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  employee_post: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  student_status: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  phone: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  move: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: false })
   password: string;

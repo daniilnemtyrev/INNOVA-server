@@ -10,6 +10,7 @@ import * as bcrypt from 'bcryptjs';
 import { TokenService } from 'src/tokens/tokens.service';
 import { User } from 'src/users/users.model';
 import { InjectModel } from '@nestjs/sequelize';
+import { LoginUser } from './dto/login-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
     @InjectModel(User) private userRepository: typeof User,
   ) {}
 
-  async login(userDto: CreateUserDto) {
+  async login(userDto: LoginUser) {
     const user = await this.validateUser(userDto);
     const tokens = this.tokenService.generateToken(user);
     await this.tokenService.saveToken(user.id, tokens.refreshToken);
@@ -27,7 +28,7 @@ export class AuthService {
     return data;
   }
 
-  private async validateUser(userDto: CreateUserDto) {
+  private async validateUser(userDto: LoginUser) {
     const user = await this.userService.getUserByEmail(userDto.email);
     if (!user) {
       throw new UnauthorizedException({
