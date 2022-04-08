@@ -20,6 +20,22 @@ export class UsersService {
     return user;
   }
 
+  async editUser(dto: CreateUserDto) {
+    const user = await this.userRepository.findByPk(dto.id);
+    await user.update({
+      surname: dto.surname,
+      name: dto.name,
+      patronymic: dto.patronymic,
+      phone: dto.phone,
+      birthdate: dto.birthdate,
+      move_to: dto.move_to,
+      move_from: dto.move_from,
+      post_status: dto.post_status,
+      place_of_work_stud: dto.place_of_work_stud,
+    });
+    return user;
+  }
+
   async getAllUsers() {
     const users = await this.userRepository.findAll({ include: { all: true } });
     return users;

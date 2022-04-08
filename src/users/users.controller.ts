@@ -18,6 +18,12 @@ export class UsersController {
     return this.userService.createUser(userDto);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Post('/editUser')
+  editUser(@Body() userDto: CreateUserDto) {
+    return this.userService.editUser(userDto);
+  }
+
   @Roles('admin')
   @UseGuards(RolesGuard)
   @UseGuards(JwtAuthGuard)

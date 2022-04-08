@@ -39,16 +39,19 @@ export class User extends Model<User, UserCreationOptions> {
   birthdate: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
-  employee_post: string;
+  post_status: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
-  student_status: string;
+  place_of_work_stud: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
   phone: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
-  move: string;
+  move_to: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  move_from: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: false })
   password: string;
