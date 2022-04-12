@@ -26,6 +26,8 @@ export class CreateUserDto {
 
   readonly move_from: string;
 
+  readonly request_status: string;
+
   @IsNotEmpty()
   @Length(4, 20)
   readonly password: string;

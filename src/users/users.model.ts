@@ -42,6 +42,9 @@ export class User extends Model<User, UserCreationOptions> {
   post_status: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
+  request_status: string;
+
+  @Column({ type: DataType.STRING, unique: false, allowNull: true })
   place_of_work_stud: string;
 
   @Column({ type: DataType.STRING, unique: false, allowNull: true })
