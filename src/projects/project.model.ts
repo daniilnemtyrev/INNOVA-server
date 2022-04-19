@@ -6,15 +6,14 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from 'src/users/users.model';
-import { UserRoles } from './user-roles.model';
 
-interface RoleCreationOptions {
-  value: string;
+interface ProjectCreationOptions {
+  name: string;
   description: string;
 }
 
-@Table({ tableName: 'roles', createdAt: false, updatedAt: false })
-export class Role extends Model<Role, RoleCreationOptions> {
+@Table({ tableName: 'projects' })
+export class Project extends Model<Project, ProjectCreationOptions> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -24,11 +23,11 @@ export class Role extends Model<Role, RoleCreationOptions> {
   id: number;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  value: string;
+  name: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
   description: string;
 
-  @BelongsToMany(() => User, () => UserRoles)
-  users: User[];
+  // @BelongsToMany(() => User, () => UserRoles)
+  // users: User[];
 }

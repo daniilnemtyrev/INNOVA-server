@@ -10,6 +10,11 @@ import { ChatModule } from './chat/chat.module';
 import { RolesModule } from './roles/roles.module';
 import { Role } from './roles/roles.model';
 import { UserRoles } from './roles/user-roles.model';
+import { ProjectsModule } from './projects/projects.module';
+import { CasesModule } from './cases/cases.module';
+import { TracksModule } from './tracks/tracks.module';
+import { Case } from './cases/cases.model';
+import { Track } from './tracks/tracks.model';
 
 @Module({
   controllers: [],
@@ -25,13 +30,16 @@ import { UserRoles } from './roles/user-roles.model';
       username: 'a45359_innova3',
       password: 'q1w2e3r4t5',
       database: 'a45359_innova3',
-      models: [User, Token, Role, UserRoles],
+      models: [User, Token, Role, UserRoles, Case, Track],
       autoLoadModels: true,
     }),
     UsersModule,
     AuthModule,
     ChatModule,
     RolesModule,
+    ProjectsModule,
+    CasesModule,
+    TracksModule,
   ],
 })
 export class AppModule {}
