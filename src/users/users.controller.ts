@@ -1,4 +1,4 @@
-import { Get, UseGuards } from '@nestjs/common';
+import { Get, Param, UseGuards } from '@nestjs/common';
 import { Body, Controller, Post } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/roles/roles-auth.decorator';
@@ -24,13 +24,20 @@ export class UsersController {
     return this.userService.editUser(userDto);
   }
 
-  @Roles('admin')
-  @UseGuards(RolesGuard)
-  @UseGuards(JwtAuthGuard)
+  // @Roles('admin')
+  // @UseGuards(RolesGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('/getAll')
   getAll() {
     return this.userService.getAllUsers();
   }
+
+   @Get('/getUserByQuery')
+  getUserByQuery() {
+    return this.userService.getFiltredUsers();
+  }
+
+   
 
   @Roles('admin')
   @UseGuards(RolesGuard)
