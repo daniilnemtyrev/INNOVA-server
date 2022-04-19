@@ -5,7 +5,7 @@ export interface TokenCreationOptions {
   refreshToken: string;
 }
 
-@Table({ tableName: 'tokens' })
+@Table({ tableName: 'tokens', createdAt: false, updatedAt: false })
 export class Token extends Model<Token, TokenCreationOptions> {
   @Column({
     type: DataType.INTEGER,

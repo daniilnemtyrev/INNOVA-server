@@ -5,6 +5,7 @@ import { RolesService } from 'src/roles/roles.service';
 import { BanUserDto } from './dto/ban-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
+import { UpdReqStatusDto } from './dto/upd-req-status.dto';
 import { User } from './users.model';
 
 @Injectable()
@@ -16,6 +17,9 @@ export class UsersService {
 
   async createUser(dto: CreateUserDto) {
     const user = await this.userRepository.create(dto);
+    await user.update({
+      request_status: 'Не подтвержден',
+    });
     const role = await this.roleService.getRoleByValue('user');
     await user.$set('roles', [role.id]);
     return user;
@@ -36,6 +40,14 @@ export class UsersService {
       place_of_work_stud: dto.place_of_work_stud,
     });
     return user;
+  }
+
+  async updateRequestStatus(dto: UpdReqStatusDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    await user.update({
+      request_status: dto.reqStatus,
+    });
+    return user.request_status;
   }
 
   async getAllUsers() {

@@ -25,8 +25,6 @@ export class RolesGuard implements CanActivate {
       );
 
       if (!requiredRoles) {
-        console.log('PIZDA');
-
         return true;
       }
 

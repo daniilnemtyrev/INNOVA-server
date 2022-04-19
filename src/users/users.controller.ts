@@ -7,6 +7,7 @@ import { BanUserDto } from './dto/ban-user.dto';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
+import { UpdReqStatusDto } from './dto/upd-req-status.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -22,6 +23,12 @@ export class UsersController {
   @Post('/editUser')
   editUser(@Body() userDto: CreateUserDto) {
     return this.userService.editUser(userDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/updReqStatus')
+  updateRequestStatus(@Body() dto: UpdReqStatusDto) {
+    return this.userService.updateRequestStatus(dto);
   }
 
   // @Roles('admin')
