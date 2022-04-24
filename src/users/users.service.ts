@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { where } from 'sequelize/types';
 import { RolesService } from 'src/roles/roles.service';
 import { BanUserDto } from './dto/ban-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -35,6 +36,7 @@ export class UsersService {
       move_to: dto.move_to,
       move_from: dto.move_from,
       post_status: dto.post_status,
+      request_status: dto.request_status,
       place_of_work_stud: dto.place_of_work_stud,
     });
     return user;
@@ -49,8 +51,13 @@ export class UsersService {
   }
 
   async getAllUsers() {
-    const users = await this.userRepository.findAll({ include: { all: true } });
-    return users;
+    const users = await this.userRepository.findAll({ include: [{ all: true}]})
+    return {data: [...users], total:users.length}
+  }
+
+  async getFiltredUsers() {
+  const  users = await this.userRepository.findAll({where:{request_status:'Ожидается подтверждение'}})
+  return {data: [...users], total:users.length}
   }
 
   async getUserByEmail(email: string) {
