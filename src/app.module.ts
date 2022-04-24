@@ -15,6 +15,7 @@ import { CasesModule } from './cases/cases.module';
 import { TracksModule } from './tracks/tracks.module';
 import { Case } from './cases/cases.model';
 import { Track } from './tracks/tracks.model';
+import { Project } from './projects/project.model';
 
 @Module({
   controllers: [],
@@ -30,7 +31,7 @@ import { Track } from './tracks/tracks.model';
       username: 'a45359_innova3',
       password: 'q1w2e3r4t5',
       database: 'a45359_innova3',
-      models: [User, Token, Role, UserRoles, Case, Track],
+      models: [User, Token, Role, UserRoles, Case, Track, Project],
       autoLoadModels: true,
     }),
     UsersModule,

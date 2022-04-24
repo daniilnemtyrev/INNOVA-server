@@ -9,6 +9,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { TracksService } from 'src/tracks/tracks.service';
 import { Case } from './cases.model';
 import { CaseDto } from './dto/cases.dto';
+import { GetCasesDto } from './dto/getCases.dto';
 
 interface ICase {
   id: number;
@@ -28,7 +29,8 @@ export class CasesService {
   async createCase(dto: CaseDto) {
     const caseDto = await this.casesRepository.create(dto);
     const track = await this.tracksService.getTrackById(dto.trackId);
-    const thisTrackCases = await this.getCasesByTrackId(track.trackId);
+    const thisTrackCases = await this.getCasesByTrackId(track);
+    console.log(thisTrackCases);
 
     if (caseDto && track && thisTrackCases.length === 0) {
       await track.$set('cases', [caseDto.id]);
@@ -46,10 +48,11 @@ export class CasesService {
     );
   }
 
-  async getCasesByTrackId(id: number) {
+  async getCasesByTrackId(dto: GetCasesDto) {
     const cases = await this.casesRepository.findAll({
-      where: { trackId: id },
+      where: { trackId: dto.trackId },
     });
+
     return cases;
   }
 }

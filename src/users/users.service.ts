@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   async editUser(dto: CreateUserDto) {
-    const user = await this.userRepository.findByPk(dto.id);
+    const user = await this.userRepository.findByPk(dto.userId);
     await user.update({
       surname: dto.surname,
       name: dto.name,

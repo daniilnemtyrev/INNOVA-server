@@ -2,11 +2,15 @@ import {
   BelongsToMany,
   Column,
   DataType,
+  HasMany,
+  HasOne,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Project } from 'src/projects/project.model';
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
+import { Token } from 'src/tokens/tokens.model';
 
 interface UserCreationOptions {
   email: string;
@@ -21,7 +25,7 @@ export class User extends Model<User, UserCreationOptions> {
     autoIncrement: true,
     primaryKey: true,
   })
-  id: number;
+  userId: number;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   email: string;
@@ -61,4 +65,10 @@ export class User extends Model<User, UserCreationOptions> {
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @HasMany(() => Project)
+  cases: Project[];
+
+  @HasOne(() => Token)
+  token: Token;
 }

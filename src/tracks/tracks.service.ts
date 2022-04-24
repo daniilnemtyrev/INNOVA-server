@@ -17,9 +17,7 @@ export class TracksService {
   }
 
   async getAllTracks() {
-    const tracks = await this.trackRepository.findAll({
-      include: { all: true },
-    });
+    const tracks = await this.trackRepository.findAll();
     return tracks;
   }
 

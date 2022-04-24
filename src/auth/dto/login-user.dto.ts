@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class LoginUser {
-  readonly id: number;
+  readonly userId: number;
 
   @IsString()
   @IsEmail()
