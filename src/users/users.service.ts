@@ -27,7 +27,7 @@ export class UsersService {
   }
 
   async editUser(dto: CreateUserDto) {
-    const user = await this.userRepository.findByPk(dto.userId);
+    const user = await this.userRepository.findByPk(dto.id);
     await user.update({
       surname: dto.surname,
       name: dto.name,
@@ -44,7 +44,7 @@ export class UsersService {
   }
 
   async updateRequestStatus(dto: UpdReqStatusDto) {
-    const user = await this.userRepository.findByPk(dto.userId);
+    const user = await this.userRepository.findByPk(dto.id);
     await user.update({
       request_status: dto.reqStatus,
     });

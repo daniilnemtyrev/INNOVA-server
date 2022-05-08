@@ -17,7 +17,7 @@ export class ProjectsService {
 
   async getProjectByUserId(dto: GetProjectDto) {
     const cases = await this.projectRepository.findAll({
-      where: { userId: dto.userId },
+      where: { id: dto.id },
     });
 
     return cases;

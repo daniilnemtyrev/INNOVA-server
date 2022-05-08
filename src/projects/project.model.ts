@@ -34,10 +34,6 @@ export class Project extends Model<Project, ProjectCreationOptions> {
   })
   id: number;
 
-  @ForeignKey(() => User)
-  @Column({ type: DataType.INTEGER, allowNull: true })
-  userId: number;
-
   @Column({ type: DataType.INTEGER, allowNull: true })
   trackId: number;
 
@@ -76,4 +72,8 @@ export class Project extends Model<Project, ProjectCreationOptions> {
 
   @BelongsTo(() => User)
   users: User;
+
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  userId: number;
 }

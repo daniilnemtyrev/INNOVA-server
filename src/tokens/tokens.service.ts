@@ -14,7 +14,7 @@ export class TokenService {
   generateToken(user) {
     const payload = {
       email: user.email,
-      userId: user.userId,
+      userId: user.id,
       roles: user.roles,
     };
     return {

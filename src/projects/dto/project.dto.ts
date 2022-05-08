@@ -1,5 +1,5 @@
 export class ProjectDto {
-  readonly userId: number;
+  readonly id: number;
   readonly trackId: number;
   readonly trackName: string;
   readonly trackDescription: string;

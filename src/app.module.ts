@@ -16,6 +16,7 @@ import { TracksModule } from './tracks/tracks.module';
 import { Case } from './cases/cases.model';
 import { Track } from './tracks/tracks.model';
 import { Project } from './projects/project.model';
+import { Messages } from './chat/chat-messages.model';
 
 @Module({
   controllers: [],
@@ -31,7 +32,7 @@ import { Project } from './projects/project.model';
       username: 'a45359_innova3',
       password: 'q1w2e3r4t5',
       database: 'a45359_innova3',
-      models: [User, Token, Role, UserRoles, Case, Track, Project],
+      models: [User, Token, Role, UserRoles, Case, Track, Project, Messages],
       autoLoadModels: true,
     }),
     UsersModule,

@@ -7,6 +7,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Messages } from 'src/chat/chat-messages.model';
 import { Project } from 'src/projects/project.model';
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
@@ -25,7 +26,7 @@ export class User extends Model<User, UserCreationOptions> {
     autoIncrement: true,
     primaryKey: true,
   })
-  userId: number;
+  id: number;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   email: string;
@@ -67,7 +68,10 @@ export class User extends Model<User, UserCreationOptions> {
   roles: Role[];
 
   @HasMany(() => Project)
-  cases: Project[];
+  projects: Project[];
+
+  @HasMany(() => Messages)
+  messages: Messages[];
 
   @HasOne(() => Token)
   token: Token;

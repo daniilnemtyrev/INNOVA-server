@@ -22,10 +22,10 @@ export class AuthService {
 
   async login(userDto: LoginUser) {
     const user = await this.validateUser(userDto);
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', user.userId);
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', user.id);
 
     const tokens = this.tokenService.generateToken(user);
-    await this.tokenService.saveToken(user.userId, tokens.refreshToken);
+    await this.tokenService.saveToken(user.id, tokens.refreshToken);
     const data = { ...tokens, user };
     return data;
   }
@@ -65,7 +65,7 @@ export class AuthService {
       password: hashPassword,
     });
     const tokens = this.tokenService.generateToken(user);
-    await this.tokenService.saveToken(user.userId, tokens.refreshToken);
+    await this.tokenService.saveToken(user.id, tokens.refreshToken);
     const data = { ...tokens, user };
     return data;
   }
@@ -89,10 +89,10 @@ export class AuthService {
       });
     }
     const user = await this.userRepository.findOne({
-      where: { userId: userData.userId },
+      where: { id: userData.id },
     });
     const tokens = this.tokenService.generateToken(user);
-    await this.tokenService.saveToken(user.userId, tokens.refreshToken);
+    await this.tokenService.saveToken(user.id, tokens.refreshToken);
     const data = { ...tokens, user };
     return data;
   }

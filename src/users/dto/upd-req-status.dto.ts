@@ -1,4 +1,4 @@
 export class UpdReqStatusDto {
-  readonly userId: number;
+  readonly id: number;
   readonly reqStatus: string;
 }
