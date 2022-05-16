@@ -16,13 +16,28 @@ export class TracksService {
     return track;
   }
 
+  async editTask(dto: TrackDto, id) {
+    const task = await this.trackRepository.findByPk(id);
+
+    await task.update({
+      name: dto.name,
+      description: dto.description,
+    });
+    return task;
+  }
+
   async getAllTracks() {
     const tracks = await this.trackRepository.findAll();
-    return tracks;
+    return { data: [...tracks] };
   }
 
   async getTrackById(id: number) {
     const track = await this.trackRepository.findByPk(id);
     return track;
+  }
+
+  async deleteTrackById(id: number) {
+    await this.caseService.deleteCasesByTrackId(id);
+    await this.trackRepository.destroy({ where: { id } });
   }
 }

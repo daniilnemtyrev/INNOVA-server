@@ -1,3 +1,3 @@
 export class GetCasesDto {
-  readonly trackId: number;
+  readonly id: number;
 }

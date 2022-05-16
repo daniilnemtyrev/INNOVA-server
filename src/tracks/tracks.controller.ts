@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { TrackDto } from './dto/tracks.dto';
 import { TracksService } from './tracks.service';
 
@@ -6,12 +14,27 @@ import { TracksService } from './tracks.service';
 export class TracksController {
   constructor(private trackService: TracksService) {}
 
-  @Post('/create')
+  @Post('')
   create(@Body() trackDto: TrackDto) {
     return this.trackService.createTrack(trackDto);
   }
 
-  @Get('/getAll')
+  @Patch(':id')
+  editTask(@Param('id') id: number, @Body() trackDto: TrackDto) {
+    return this.trackService.editTask(trackDto, id);
+  }
+
+  @Get(':id')
+  getTrackById(@Param('id') id: number) {
+    return this.trackService.getTrackById(id);
+  }
+
+  @Delete(':id')
+  deleteTrackById(@Param('id') id: number) {
+    this.trackService.deleteTrackById(id);
+  }
+
+  @Get()
   getAll() {
     return this.trackService.getAllTracks();
   }

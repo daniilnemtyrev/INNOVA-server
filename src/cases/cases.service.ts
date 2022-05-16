@@ -26,6 +26,11 @@ export class CasesService {
     private tracksService: TracksService,
   ) {}
 
+  async getAllCases() {
+    const cases = await this.casesRepository.findAll();
+    return { data: [...cases], total: cases.length };
+  }
+
   async createCase(dto: CaseDto) {
     const caseDto = await this.casesRepository.create(dto);
     const track = await this.tracksService.getTrackById(dto.trackId);
@@ -48,11 +53,37 @@ export class CasesService {
     );
   }
 
+  async getCaseById(id: number) {
+    const caseItem = await this.casesRepository.findByPk(id);
+    return caseItem;
+  }
+
   async getCasesByTrackId(dto: GetCasesDto) {
     const cases = await this.casesRepository.findAll({
-      where: { trackId: dto.trackId },
+      where: { trackId: dto.id },
     });
 
     return cases;
+  }
+
+  async deleteCasesByTrackId(id: number) {
+    await this.casesRepository.destroy({
+      where: { trackId: id },
+    });
+  }
+
+  async editCase(dto: CaseDto, id) {
+    const caseItem = await this.casesRepository.findByPk(id);
+
+    await caseItem.update({
+      name: dto.name,
+      trackId: dto.trackId,
+      description: dto.description,
+    });
+    return caseItem;
+  }
+
+  async deleteCaseById(id: number) {
+    await this.casesRepository.destroy({ where: { id } });
   }
 }

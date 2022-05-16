@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CasesService } from './cases.service';
 import { CaseDto } from './dto/cases.dto';
 import { GetCasesDto } from './dto/getCases.dto';
@@ -7,15 +15,33 @@ import { GetCasesDto } from './dto/getCases.dto';
 export class CasesController {
   constructor(private caseService: CasesService) {}
 
-  @Post('/create')
-  create(@Body() trackDto: CaseDto) {
-    return this.caseService.createCase(trackDto);
+  @Post('')
+  create(@Body() caseDto: CaseDto) {
+    return this.caseService.createCase(caseDto);
   }
 
-  @Post('/getCasesByTrackId')
-  getCasesByTrackId(@Body() data: GetCasesDto) {
-    console.log(data);
+  @Get()
+  getAll() {
+    return this.caseService.getAllCases();
+  }
 
+  @Get(':id')
+  getCaseById(@Param('id') id: number) {
+    return this.caseService.getCaseById(id);
+  }
+
+  @Patch(':id')
+  editCase(@Param('id') id: number, @Body() caseDto: CaseDto) {
+    return this.caseService.editCase(caseDto, id);
+  }
+
+  @Delete(':id')
+  deleteTrackById(@Param('id') id: number) {
+    this.caseService.deleteCaseById(id);
+  }
+
+  @Get('/getCasesByTrackId')
+  getCasesByTrackId(@Body() data: GetCasesDto) {
     return this.caseService.getCasesByTrackId(data);
   }
 }

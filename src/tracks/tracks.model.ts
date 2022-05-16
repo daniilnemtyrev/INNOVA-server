@@ -14,7 +14,7 @@ export class Track extends Model<Track, TrackCreationOptions> {
     autoIncrement: true,
     primaryKey: true,
   })
-  trackId: number;
+  id: number;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   name: string;
