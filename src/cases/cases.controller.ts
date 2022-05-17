@@ -36,7 +36,7 @@ export class CasesController {
   }
 
   @Delete(':id')
-  deleteTrackById(@Param('id') id: number) {
+  deleteCaseById(@Param('id') id: number) {
     this.caseService.deleteCaseById(id);
   }
 

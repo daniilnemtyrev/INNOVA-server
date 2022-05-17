@@ -28,7 +28,7 @@ export class TracksService {
 
   async getAllTracks() {
     const tracks = await this.trackRepository.findAll();
-    return { data: [...tracks] };
+    return { data: [...tracks], total: tracks.length };
   }
 
   async getTrackById(id: number) {

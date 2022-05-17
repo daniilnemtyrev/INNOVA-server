@@ -64,6 +64,14 @@ export class User extends Model<User, UserCreationOptions> {
   @Column({ type: DataType.STRING, unique: false, allowNull: false })
   password: string;
 
+  @Column({
+    type: DataType.STRING,
+    unique: false,
+    allowNull: false,
+    defaultValue: 'Активный',
+  })
+  status: string;
+
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
 

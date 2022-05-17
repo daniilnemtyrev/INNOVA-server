@@ -26,8 +26,8 @@ export class UsersService {
     return user;
   }
 
-  async editUser(dto: CreateUserDto) {
-    const user = await this.userRepository.findByPk(dto.id);
+  async editUser(dto: CreateUserDto, id) {
+    const user = await this.userRepository.findByPk(id);
     await user.update({
       surname: dto.surname,
       name: dto.name,
@@ -56,11 +56,22 @@ export class UsersService {
     return { data: [...users], total: users.length };
   }
 
+  async deleteUserById(id: number) {
+    await this.userRepository.destroy({
+      where: { id },
+    });
+  }
+
   async getFiltredUsers() {
     const users = await this.userRepository.findAll({
       where: { request_status: 'Ожидается подтверждение' },
     });
     return { data: [...users], total: users.length };
+  }
+
+  async getUserById(id: number) {
+    const user = await this.userRepository.findByPk(id);
+    return user;
   }
 
   async getUserByEmail(email: string) {

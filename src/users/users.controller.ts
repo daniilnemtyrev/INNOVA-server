@@ -1,4 +1,4 @@
-import { Get, Param, UseGuards } from '@nestjs/common';
+import { Delete, Get, Param, Patch, UseGuards } from '@nestjs/common';
 import { Body, Controller, Post } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/roles/roles-auth.decorator';
@@ -14,15 +14,15 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
-  @Post('/create')
+  @Post('')
   create(@Body() userDto: CreateUserDto) {
     return this.userService.createUser(userDto);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('/editUser')
-  editUser(@Body() userDto: CreateUserDto) {
-    return this.userService.editUser(userDto);
+  @Patch(':id')
+  editUser(@Param('id') id: number, @Body() userDto: CreateUserDto) {
+    return this.userService.editUser(userDto, id);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -34,17 +34,25 @@ export class UsersController {
   // @Roles('admin')
   // @UseGuards(RolesGuard)
   // @UseGuards(JwtAuthGuard)
-  @Get('/getAll')
+  @Get('')
   getAll() {
     return this.userService.getAllUsers();
   }
 
-   @Get('/getUserByQuery')
-  getUserByQuery() {
+  @Get('/requests')
+  getUsersByRequest() {
     return this.userService.getFiltredUsers();
   }
 
-   
+  @Get(':id')
+  getUserById(@Param('id') id: number) {
+    return this.userService.getUserById(id);
+  }
+
+  @Delete(':id')
+  deleteUserById(@Param('id') id: number) {
+    this.userService.deleteUserById(id);
+  }
 
   @Roles('admin')
   @UseGuards(RolesGuard)
