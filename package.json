@@ -38,6 +38,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
     "mongoose": "^5.13.7",
+    "mysql2": "^2.3.3",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",

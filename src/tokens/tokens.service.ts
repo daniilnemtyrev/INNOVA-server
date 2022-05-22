@@ -12,7 +12,11 @@ export class TokenService {
   ) {}
 
   generateToken(user) {
-    const payload = { email: user.email, id: user.id };
+    const payload = {
+      email: user.email,
+      userId: user.id,
+      roles: user.roles,
+    };
     return {
       acessToken: this.jwtService.sign(payload, {
         expiresIn: '30m',
