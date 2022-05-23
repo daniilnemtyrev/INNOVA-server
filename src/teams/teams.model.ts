@@ -4,20 +4,20 @@ import {
   DataType,
   ForeignKey,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Track } from 'src/tracks/tracks.model';
+import { Project } from 'src/projects/project.model';
+
 import { User } from 'src/users/users.model';
 
-interface CaseCreationOptions {
+interface TeamCreationOptions {
   name: string;
-  trackId: number;
-  description: string;
 }
 
 @Table({ tableName: 'teams', createdAt: false, updatedAt: false })
-export class Team extends Model<Team, CaseCreationOptions> {
+export class Team extends Model<Team, TeamCreationOptions> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -26,11 +26,11 @@ export class Team extends Model<Team, CaseCreationOptions> {
   })
   id: number;
 
-  @Column({ type: DataType.STRING, unique: true, allowNull: true })
+  @Column({ type: DataType.STRING, unique: true, allowNull: false })
   name: string;
 
-  @Column({ type: DataType.STRING, allowNull: true })
-  description: string;
+  @HasOne(() => Project)
+  project: Project;
 
   @HasMany(() => User)
   users: User[];

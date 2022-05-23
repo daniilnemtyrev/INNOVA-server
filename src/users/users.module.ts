@@ -10,12 +10,22 @@ import { RolesModule } from 'src/roles/roles.module';
 import { TokensModule } from 'src/tokens/tokens.module';
 import { Project } from 'src/projects/project.model';
 import { Messages } from 'src/chat/chat-messages.model';
+import { Team } from 'src/teams/teams.model';
+import { Track } from 'src/tracks/tracks.model';
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
   imports: [
-    SequelizeModule.forFeature([User, Role, UserRoles, Project, Messages]),
+    SequelizeModule.forFeature([
+      User,
+      Role,
+      UserRoles,
+      Project,
+      Messages,
+      Track,
+      Team,
+    ]),
     forwardRef(() => AuthModule),
     forwardRef(() => RolesModule),
     forwardRef(() => TokensModule),

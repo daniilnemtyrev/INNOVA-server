@@ -1,11 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { where } from 'sequelize/types';
+
 import { Role } from 'src/roles/roles.model';
 import { RolesService } from 'src/roles/roles.service';
 import { BanUserDto } from './dto/ban-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
+import { SetTeamDto } from './dto/set-team.dto';
 import { UpdReqStatusDto } from './dto/upd-req-status.dto';
 import { User } from './users.model';
 
@@ -52,7 +53,7 @@ export class UsersService {
   }
 
   async getAllUsers() {
-    const users = await this.userRepository.findAll({ include: Role });
+    const users = await this.userRepository.findAll({ include: { all: true } });
     return { data: [...users], total: users.length };
   }
 
@@ -93,6 +94,15 @@ export class UsersService {
       'Пользователь или роль не найдены',
       HttpStatus.NOT_FOUND,
     );
+  }
+
+  async setTeam(dto: SetTeamDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', dto);
+
+    await user.update({
+      teamId: dto.teamId,
+    });
   }
 
   async banUser(dto: BanUserDto) {}

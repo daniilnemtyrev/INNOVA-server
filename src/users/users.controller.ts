@@ -14,6 +14,11 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @Get('/getAll')
+  getAll() {
+    return this.userService.getAllUsers();
+  }
+
   @Post('')
   create(@Body() userDto: CreateUserDto) {
     return this.userService.createUser(userDto);
@@ -34,10 +39,6 @@ export class UsersController {
   // @Roles('admin')
   // @UseGuards(RolesGuard)
   // @UseGuards(JwtAuthGuard)
-  @Get('')
-  getAll() {
-    return this.userService.getAllUsers();
-  }
 
   @Get('/requests')
   getUsersByRequest() {

@@ -4,9 +4,13 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Case } from 'src/cases/cases.model';
+import { Team } from 'src/teams/teams.model';
+import { Track } from 'src/tracks/tracks.model';
 import { User } from 'src/users/users.model';
 
 interface ProjectCreationOptions {
@@ -34,6 +38,7 @@ export class Project extends Model<Project, ProjectCreationOptions> {
   })
   id: number;
 
+  @ForeignKey(() => Track)
   @Column({ type: DataType.INTEGER, allowNull: true })
   trackId: number;
 
@@ -43,6 +48,7 @@ export class Project extends Model<Project, ProjectCreationOptions> {
   @Column({ type: DataType.STRING, allowNull: false })
   trackDescription: string;
 
+  @ForeignKey(() => Case)
   @Column({ type: DataType.INTEGER, allowNull: true })
   caseId: number;
 
@@ -59,10 +65,10 @@ export class Project extends Model<Project, ProjectCreationOptions> {
   description: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  auditorium: string;
+  prototype: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  prototype: string;
+  auditorium: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
   economy: string;
@@ -70,10 +76,19 @@ export class Project extends Model<Project, ProjectCreationOptions> {
   @Column({ type: DataType.STRING, allowNull: false })
   marketing: string;
 
-  @BelongsTo(() => User)
-  users: User;
-
-  @ForeignKey(() => User)
+  @ForeignKey(() => Team)
   @Column({ type: DataType.INTEGER, allowNull: true })
-  userId: number;
+  teamId: number;
+
+  @BelongsTo(() => Team)
+  team: Team;
+
+  @HasMany(() => User)
+  users: User[];
+
+  @BelongsTo(() => Track)
+  track: Track;
+
+  @BelongsTo(() => Case)
+  cases: Case;
 }

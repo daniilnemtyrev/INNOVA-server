@@ -18,6 +18,7 @@ import { Track } from './tracks/tracks.model';
 import { Project } from './projects/project.model';
 import { Messages } from './chat/chat-messages.model';
 import { TeamsModule } from './teams/teams.module';
+import { Team } from './teams/teams.model';
 
 @Module({
   controllers: [],
@@ -33,7 +34,17 @@ import { TeamsModule } from './teams/teams.module';
       username: 'a45359_innova3',
       password: 'q1w2e3r4t5',
       database: 'a45359_innova3',
-      models: [User, Token, Role, UserRoles, Case, Track, Project, Messages],
+      models: [
+        User,
+        Token,
+        Role,
+        UserRoles,
+        Case,
+        Track,
+        Project,
+        Messages,
+        Team,
+      ],
       autoLoadModels: true,
     }),
     UsersModule,

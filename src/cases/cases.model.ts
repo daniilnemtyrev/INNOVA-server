@@ -3,9 +3,11 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Project } from 'src/projects/project.model';
 import { Track } from 'src/tracks/tracks.model';
 
 interface CaseCreationOptions {
@@ -36,4 +38,7 @@ export class Case extends Model<Case, CaseCreationOptions> {
 
   @BelongsTo(() => Track)
   tracks: Track;
+
+  @HasMany(() => Project)
+  projects: Project[];
 }

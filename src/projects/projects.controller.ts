@@ -12,8 +12,8 @@ export class ProjectsController {
     return this.projectService.createProject(projectDto);
   }
 
-  @Post('/getProjectsByUserId')
+  @Post('/getProjectById')
   getProjectByUserId(@Body() dto: GetProjectDto) {
-    return this.projectService.getProjectByUserId(dto);
+    return this.projectService.getProjectById(dto);
   }
 }

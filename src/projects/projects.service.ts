@@ -15,11 +15,11 @@ export class ProjectsService {
     return project;
   }
 
-  async getProjectByUserId(dto: GetProjectDto) {
-    const cases = await this.projectRepository.findAll({
-      where: { userId: dto.id },
+  async getProjectById(dto: GetProjectDto) {
+    const projects = await this.projectRepository.findOne({
+      where: { id: dto.id },
     });
 
-    return cases;
+    return projects;
   }
 }

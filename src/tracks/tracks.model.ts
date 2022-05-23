@@ -1,5 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Case } from 'src/cases/cases.model';
+import { Project } from 'src/projects/project.model';
 
 interface TrackCreationOptions {
   name: string;
@@ -24,4 +25,7 @@ export class Track extends Model<Track, TrackCreationOptions> {
 
   @HasMany(() => Case)
   cases: Case[];
+
+  @HasMany(() => Project)
+  projects: Project[];
 }

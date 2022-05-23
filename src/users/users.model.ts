@@ -78,8 +78,12 @@ export class User extends Model<User, UserCreationOptions> {
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
 
-  @HasMany(() => Project)
-  projects: Project[];
+  @ForeignKey(() => Project)
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  projectId: number;
+
+  @BelongsTo(() => Project)
+  project: Project;
 
   @HasMany(() => Messages)
   messages: Messages[];
