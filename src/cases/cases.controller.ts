@@ -15,6 +15,11 @@ import { GetCasesDto } from './dto/getCases.dto';
 export class CasesController {
   constructor(private caseService: CasesService) {}
 
+  @Post('/getCasesByTrackId')
+  getCasesByTrackId(@Body() data: GetCasesDto) {
+    return this.caseService.getCasesByTrackId(data);
+  }
+
   @Post('')
   create(@Body() caseDto: CaseDto) {
     return this.caseService.createCase(caseDto);
@@ -38,10 +43,5 @@ export class CasesController {
   @Delete(':id')
   deleteCaseById(@Param('id') id: number) {
     this.caseService.deleteCaseById(id);
-  }
-
-  @Get('/getCasesByTrackId')
-  getCasesByTrackId(@Body() data: GetCasesDto) {
-    return this.caseService.getCasesByTrackId(data);
   }
 }

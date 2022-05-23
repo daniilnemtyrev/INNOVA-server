@@ -14,6 +14,11 @@ import { TracksService } from './tracks.service';
 export class TracksController {
   constructor(private trackService: TracksService) {}
 
+  @Get('/getAll')
+  getAll() {
+    return this.trackService.getAllTracks();
+  }
+
   @Post('')
   create(@Body() trackDto: TrackDto) {
     return this.trackService.createTrack(trackDto);
@@ -32,10 +37,5 @@ export class TracksController {
   @Delete(':id')
   deleteTrackById(@Param('id') id: number) {
     this.trackService.deleteTrackById(id);
-  }
-
-  @Get()
-  getAll() {
-    return this.trackService.getAllTracks();
   }
 }

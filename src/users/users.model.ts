@@ -1,7 +1,9 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
+  ForeignKey,
   HasMany,
   HasOne,
   Model,
@@ -11,6 +13,7 @@ import { Messages } from 'src/chat/chat-messages.model';
 import { Project } from 'src/projects/project.model';
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
+import { Team } from 'src/teams/teams.model';
 import { Token } from 'src/tokens/tokens.model';
 
 interface UserCreationOptions {
@@ -83,4 +86,11 @@ export class User extends Model<User, UserCreationOptions> {
 
   @HasOne(() => Token)
   token: Token;
+
+  @ForeignKey(() => Team)
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  teamId: number;
+
+  @BelongsTo(() => Team)
+  team: Team;
 }

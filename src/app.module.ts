@@ -17,6 +17,7 @@ import { Case } from './cases/cases.model';
 import { Track } from './tracks/tracks.model';
 import { Project } from './projects/project.model';
 import { Messages } from './chat/chat-messages.model';
+import { TeamsModule } from './teams/teams.module';
 
 @Module({
   controllers: [],
@@ -42,6 +43,7 @@ import { Messages } from './chat/chat-messages.model';
     ProjectsModule,
     CasesModule,
     TracksModule,
+    TeamsModule,
   ],
 })
 export class AppModule {}
