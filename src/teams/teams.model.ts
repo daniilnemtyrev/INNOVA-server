@@ -17,6 +17,7 @@ interface TeamCreationOptions {
 }
 
 interface UserTeam {
+  id: number;
   surname: string;
   name: string;
 }

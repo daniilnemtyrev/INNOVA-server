@@ -24,9 +24,8 @@ export class TeamsService {
 
   async getTeam(dto: GetTeamDto) {
     const team = await this.teamRepository.findByPk(dto.id, {
-      include: { model: User, attributes: ['name', 'surname'] },
+      include: { model: User, attributes: ['id', 'name', 'surname'] },
     });
-    console.log(team);
 
     return team;
   }
