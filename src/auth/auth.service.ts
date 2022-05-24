@@ -21,10 +21,12 @@ export class AuthService {
   ) {}
 
   async login(userDto: LoginUser) {
+    console.log(userDto);
+
     const user = await this.validateUser(userDto);
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', user.id);
 
     const tokens = this.tokenService.generateToken(user);
+
     await this.tokenService.saveToken(user.id, tokens.refreshToken);
     const data = { ...tokens, user };
     return data;

@@ -1,7 +1,9 @@
+import { User } from './../users/users.model';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from 'src/users/users.service';
 import { CreateTeamDto } from './dto/create-team.dto';
+import { GetTeamDto } from './dto/get-team.dto';
 import { Team } from './teams.model';
 
 @Injectable()
@@ -17,6 +19,15 @@ export class TeamsService {
       name: dto.name,
     });
     await this.usersService.setTeam({ teamId: team.id, userId: dto.userId });
+    return team;
+  }
+
+  async getTeam(dto: GetTeamDto) {
+    const team = await this.teamRepository.findByPk(dto.id, {
+      include: { model: User, attributes: ['name', 'surname'] },
+    });
+    console.log(team);
+
     return team;
   }
 }

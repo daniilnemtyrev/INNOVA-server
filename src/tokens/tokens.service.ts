@@ -27,11 +27,12 @@ export class TokenService {
     };
   }
 
-  async saveToken(userId, refreshToken) {
+  async saveToken(userId: number, refreshToken: string) {
     const tokenData = await this.tokenRepository.findOne({
       where: { userId: userId },
       include: { all: true },
     });
+
     if (tokenData) {
       tokenData.refreshToken = refreshToken;
       return tokenData.save();

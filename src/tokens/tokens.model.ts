@@ -9,7 +9,7 @@ import {
 import { User } from 'src/users/users.model';
 
 export interface TokenCreationOptions {
-  userId: string;
+  userId: number;
   refreshToken: string;
 }
 

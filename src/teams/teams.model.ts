@@ -16,6 +16,11 @@ interface TeamCreationOptions {
   name: string;
 }
 
+interface UserTeam {
+  surname: string;
+  name: string;
+}
+
 @Table({ tableName: 'teams', createdAt: false, updatedAt: false })
 export class Team extends Model<Team, TeamCreationOptions> {
   @Column({
@@ -33,5 +38,5 @@ export class Team extends Model<Team, TeamCreationOptions> {
   project: Project;
 
   @HasMany(() => User)
-  users: User[];
+  users: UserTeam[];
 }

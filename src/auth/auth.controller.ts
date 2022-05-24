@@ -25,10 +25,8 @@ export class AuthController {
   @UsePipes(new ValidationPipe())
   @Post('/login')
   async login(@Body() userDto: LoginUser, @Res() res: Response) {
-   
-
     const userData = await this.authService.login(userDto);
-    console.log(userData.user.roles[0].value)
+
     res.cookie('refreshToken', userData.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
