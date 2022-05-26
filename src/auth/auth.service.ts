@@ -21,8 +21,6 @@ export class AuthService {
   ) {}
 
   async login(userDto: LoginUser) {
-    console.log(userDto);
-
     const user = await this.validateUser(userDto);
 
     const tokens = this.tokenService.generateToken(user);

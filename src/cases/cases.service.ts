@@ -35,7 +35,6 @@ export class CasesService {
     const caseDto = await this.casesRepository.create(dto);
     const track = await this.tracksService.getTrackById(dto.trackId);
     const thisTrackCases = await this.getCasesByTrackId(track);
-    console.log(thisTrackCases);
 
     if (caseDto && track && thisTrackCases.length === 0) {
       await track.$set('cases', [caseDto.id]);

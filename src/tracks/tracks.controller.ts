@@ -14,7 +14,7 @@ import { TracksService } from './tracks.service';
 export class TracksController {
   constructor(private trackService: TracksService) {}
 
-  @Get('/getAllTracks')
+  @Get('')
   getAll() {
     return this.trackService.getAllTracks();
   }
