@@ -19,6 +19,10 @@ import { Project } from './projects/project.model';
 import { Messages } from './chat/chat-messages.model';
 import { TeamsModule } from './teams/teams.module';
 import { Team } from './teams/teams.model';
+import { TimetableModule } from './timetable/timetable.module';
+import { Timetable } from './timetable/timetable.model';
+import { NewsModule } from './news/news.module';
+import { News } from './news/news.model';
 
 @Module({
   controllers: [],
@@ -35,6 +39,7 @@ import { Team } from './teams/teams.model';
       password: 'q1w2e3r4t5',
       database: 'a45359_innova3',
       models: [
+        News,
         User,
         Token,
         Role,
@@ -44,6 +49,7 @@ import { Team } from './teams/teams.model';
         Project,
         Messages,
         Team,
+        Timetable,
       ],
       autoLoadModels: true,
     }),
@@ -55,6 +61,8 @@ import { Team } from './teams/teams.model';
     CasesModule,
     TracksModule,
     TeamsModule,
+    TimetableModule,
+    NewsModule,
   ],
 })
 export class AppModule {}

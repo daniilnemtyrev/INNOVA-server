@@ -84,6 +84,7 @@ export class UsersService {
       include: [
         { model: Project, attributes: ['id', 'name'] },
         { model: Team, attributes: ['id', 'name'] },
+        { model: Role, attributes: ['value'] },
       ],
     });
     return user;
