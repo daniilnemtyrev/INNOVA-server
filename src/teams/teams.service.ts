@@ -5,6 +5,7 @@ import { UsersService } from 'src/users/users.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { GetTeamDto } from './dto/get-team.dto';
 import { Team } from './teams.model';
+import { Project } from 'src/projects/project.model';
 
 @Injectable()
 export class TeamsService {
@@ -24,7 +25,10 @@ export class TeamsService {
 
   async getTeam(dto: GetTeamDto) {
     const team = await this.teamRepository.findByPk(dto.id, {
-      include: { model: User, attributes: ['id', 'name', 'surname'] },
+      include: [
+        { model: User, attributes: ['id', 'name', 'surname'] },
+        { model: Project, attributes: ['id', 'name'] },
+      ],
     });
 
     return team;

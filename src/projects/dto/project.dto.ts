@@ -12,4 +12,5 @@ export class ProjectDto {
   readonly prototype: string;
   readonly economy: string;
   readonly marketing: string;
+  readonly userId: number;
 }

@@ -1,11 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { Project } from 'src/projects/project.model';
 
 import { Role } from 'src/roles/roles.model';
 import { RolesService } from 'src/roles/roles.service';
+import { Team } from 'src/teams/teams.model';
 import { BanUserDto } from './dto/ban-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
+import { SetProjectDto } from './dto/set-project.dto';
 import { SetTeamDto } from './dto/set-team.dto';
 import { UpdReqStatusDto } from './dto/upd-req-status.dto';
 import { User } from './users.model';
@@ -78,6 +81,10 @@ export class UsersService {
   async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({
       where: { email },
+      include: [
+        { model: Project, attributes: ['id', 'name'] },
+        { model: Team, attributes: ['id', 'name'] },
+      ],
     });
     return user;
   }
@@ -97,10 +104,15 @@ export class UsersService {
 
   async setTeam(dto: SetTeamDto) {
     const user = await this.userRepository.findByPk(dto.userId);
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', dto);
-
     await user.update({
       teamId: dto.teamId,
+    });
+  }
+
+  async setProject(dto: SetProjectDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    await user.update({
+      projectId: dto.projectId,
     });
   }
 
