@@ -60,6 +60,22 @@ export class UsersService {
     return { data: [...users], total: users.length };
   }
 
+  async getConfirmedUsers() {
+    const users = await this.userRepository.findAll({
+      where: { request_status: 'Подтвержден', teamId: null },
+    });
+
+    const defaultUsers = await this.roleService.getDefaultUsers();
+    const confirmedUsers = defaultUsers
+      .map((defaultUser) =>
+        users.find((user) => defaultUser.userId === user.id),
+      )
+      .filter((element) => element !== undefined);
+    console.log(confirmedUsers);
+
+    return confirmedUsers;
+  }
+
   async deleteUserById(id: number) {
     await this.userRepository.destroy({
       where: { id },

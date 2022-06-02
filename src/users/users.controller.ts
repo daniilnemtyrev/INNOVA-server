@@ -19,6 +19,11 @@ export class UsersController {
     return this.userService.getAllUsers();
   }
 
+  @Get('/getConfirmedUsers')
+  getConfirmedUsers() {
+    return this.userService.getConfirmedUsers();
+  }
+
   @Post('')
   create(@Body() userDto: CreateUserDto) {
     return this.userService.createUser(userDto);
