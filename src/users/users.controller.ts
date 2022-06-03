@@ -7,6 +7,7 @@ import { BanUserDto } from './dto/ban-user.dto';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
+import { RemoveUserTeamDto } from './dto/remove-user-team.dto';
 import { UpdReqStatusDto } from './dto/upd-req-status.dto';
 import { UsersService } from './users.service';
 
@@ -27,6 +28,11 @@ export class UsersController {
   @Post('')
   create(@Body() userDto: CreateUserDto) {
     return this.userService.createUser(userDto);
+  }
+
+  @Post('/removeUserTeam')
+  removeUserTeam(@Body() removeUserTeamDto: RemoveUserTeamDto) {
+    return this.userService.removeUserTeam(removeUserTeamDto);
   }
 
   @UseGuards(JwtAuthGuard)

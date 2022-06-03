@@ -10,6 +10,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Messages } from 'src/chat/chat-messages.model';
+import { Invite } from 'src/invite/invite.model';
 import { Project } from 'src/projects/project.model';
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
@@ -87,6 +88,9 @@ export class User extends Model<User, UserCreationOptions> {
 
   @HasMany(() => Messages)
   messages: Messages[];
+
+  @HasMany(() => Invite)
+  invites: Invite[];
 
   @HasOne(() => Token)
   token: Token;

@@ -23,6 +23,8 @@ import { TimetableModule } from './timetable/timetable.module';
 import { Timetable } from './timetable/timetable.model';
 import { NewsModule } from './news/news.module';
 import { News } from './news/news.model';
+import { InvitesModule } from './invite/invite.module';
+import { Invite } from './invite/invite.model';
 
 @Module({
   controllers: [],
@@ -50,6 +52,7 @@ import { News } from './news/news.model';
         Messages,
         Team,
         Timetable,
+        Invite,
       ],
       autoLoadModels: true,
     }),
@@ -63,6 +66,7 @@ import { News } from './news/news.model';
     TeamsModule,
     TimetableModule,
     NewsModule,
+    InvitesModule,
   ],
 })
 export class AppModule {}
