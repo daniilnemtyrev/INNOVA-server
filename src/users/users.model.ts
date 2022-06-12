@@ -32,6 +32,9 @@ export class User extends Model<User, UserCreationOptions> {
   })
   id: number;
 
+  @Column({ type: DataType.STRING, allowNull: false })
+  imagePath: string;
+
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   email: string;
 

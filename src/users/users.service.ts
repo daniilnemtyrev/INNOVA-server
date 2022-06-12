@@ -1,5 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { join } from 'path';
+import { of } from 'rxjs';
 import { Invite } from 'src/invite/invite.model';
 import { Project } from 'src/projects/project.model';
 
@@ -10,6 +12,7 @@ import { BanUserDto } from './dto/ban-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
 import { RemoveUserTeamDto } from './dto/remove-user-team.dto';
+import { SetImageDto } from './dto/set-image.dto';
 import { SetProjectDto } from './dto/set-project.dto';
 import { SetTeamDto } from './dto/set-team.dto';
 import { UpdReqStatusDto } from './dto/upd-req-status.dto';
@@ -32,8 +35,23 @@ export class UsersService {
     return user;
   }
 
+  async setImage(file: Express.Multer.File, id: number) {
+    const user = await this.userRepository.findByPk(id);
+    await user.update({
+      imagePath: file.path,
+    });
+    return user.imagePath;
+  }
+
+  async findImage(id: number, res) {
+    const user = await this.userRepository.findByPk(id);
+    return of(res.sendFile(join(process.cwd(), user.imagePath)));
+  }
+
   async editUser(dto: CreateUserDto, id) {
     const user = await this.userRepository.findByPk(id);
+    console.log(user);
+
     await user.update({
       surname: dto.surname,
       name: dto.name,

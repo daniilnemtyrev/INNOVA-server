@@ -8,6 +8,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   readonly email: string;
 
+  readonly imagePath: string;
+
   readonly surname: string;
 
   readonly name: string;
