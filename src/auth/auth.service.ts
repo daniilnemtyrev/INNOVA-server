@@ -89,7 +89,7 @@ export class AuthService {
       });
     }
     const user = await this.userRepository.findOne({
-      where: { id: userData.id },
+      where: { id: userData.userId },
     });
     const tokens = this.tokenService.generateToken(user);
     await this.tokenService.saveToken(user.id, tokens.refreshToken);

@@ -21,7 +21,7 @@ export class Token extends Model<Token, TokenCreationOptions> {
   @ForeignKey(() => User)
   userId: number;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.TEXT })
   refreshToken: string;
 
   @BelongsTo(() => User)

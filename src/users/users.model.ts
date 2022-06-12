@@ -32,7 +32,7 @@ export class User extends Model<User, UserCreationOptions> {
   })
   id: number;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.STRING, allowNull: true })
   imagePath: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
@@ -102,7 +102,7 @@ export class User extends Model<User, UserCreationOptions> {
   @Column({ type: DataType.INTEGER, allowNull: true })
   teamId: number;
 
-  @Column({ type: DataType.INTEGER, unique: false, allowNull: true  })
+  @Column({ type: DataType.INTEGER, unique: false, allowNull: true })
   points: number;
 
   @BelongsTo(() => Team)
