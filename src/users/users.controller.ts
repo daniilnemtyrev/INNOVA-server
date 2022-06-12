@@ -24,7 +24,6 @@ export class UsersController {
     return this.userService.createUser(userDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   editUser(@Param('id') id: number, @Body() userDto: CreateUserDto) {
     return this.userService.editUser(userDto, id);

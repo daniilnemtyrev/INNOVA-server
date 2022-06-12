@@ -1,3 +1,4 @@
+import { Sponsors } from './sponsors/sponsors.model';
 import { UsersModule } from './users/users.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -23,6 +24,7 @@ import { TimetableModule } from './timetable/timetable.module';
 import { Timetable } from './timetable/timetable.model';
 import { NewsModule } from './news/news.module';
 import { News } from './news/news.model';
+import { SponsorsModule } from './sponsors/sponsors.module';
 
 @Module({
   controllers: [],
@@ -50,6 +52,7 @@ import { News } from './news/news.model';
         Messages,
         Team,
         Timetable,
+        Sponsors,
       ],
       autoLoadModels: true,
     }),
@@ -63,6 +66,7 @@ import { News } from './news/news.model';
     TeamsModule,
     TimetableModule,
     NewsModule,
+    SponsorsModule,
   ],
 })
 export class AppModule {}
