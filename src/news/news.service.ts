@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { writeFile } from 'fs/promises';
 import { join } from 'path';
 import { of } from 'rxjs';
-import { NewsDto } from './dto/news.dto';
+import { NewsDto, UpdateNewsDto } from './dto/news.dto';
 import { News } from './news.model';
 
 @Injectable()
@@ -33,11 +32,21 @@ export class NewsService {
     return of(res.sendFile(join(process.cwd(), news.imagePath)));
   }
 
-  update(id: number, updateNewsDto: NewsDto) {
-    return `This action updates a #${id} news`;
+  async update(
+    id: number,
+    updateNewsDto: UpdateNewsDto,
+    file: Express.Multer.File,
+  ) {
+    const news = await this.newsRepository.findByPk(id);
+
+    await news.update({
+      ...updateNewsDto,
+      imagePath: file?.path,
+    });
+    return news;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} news`;
+  async remove(id: number) {
+    await this.newsRepository.destroy({ where: { id } });
   }
 }

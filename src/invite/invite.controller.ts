@@ -16,7 +16,8 @@ export class InviteController {
 
   @Post('/acceptInvite')
   acceptInvite(@Body() acceptDto: AcceptInviteDto) {
-    return this.inviteService.acceptInvite(acceptDto);
+    
+    this.inviteService.acceptInvite(acceptDto);
   }
 
   @Post('/cancelInvite')

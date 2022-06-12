@@ -63,6 +63,7 @@ export class UsersService {
       post_status: dto.post_status,
       request_status: dto.request_status,
       place_of_work_stud: dto.place_of_work_stud,
+      status: dto.status
     });
     return user;
   }
@@ -140,7 +141,6 @@ export class UsersService {
 
   async setTeam(dto: SetTeamDto) {
     const user = await this.userRepository.findByPk(dto.userId);
-
     await user.update({
       teamId: dto.teamId,
     });
@@ -156,6 +156,7 @@ export class UsersService {
   async removeUserTeam(dto: RemoveUserTeamDto) {
     const user = await this.userRepository.findByPk(dto.userId);
     await user.update({
+      projectId:null,
       teamId: null,
     });
   }

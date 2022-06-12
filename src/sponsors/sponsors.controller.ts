@@ -1,32 +1,32 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
-  UseInterceptors,
-  UploadedFile,
+  Get,
+  Param,
+  Patch,
+  Post,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
-import { NewsService } from './news.service';
-import { NewsDto, UpdateNewsDto } from './dto/news.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { Observable, of } from 'rxjs';
 import { parse } from 'path';
-import { News } from './news.model';
+import { Observable } from 'rxjs';
+import { SponsorsDto } from './dto/sponsors.dto';
+import { Sponsors } from './sponsors.model';
+import { SponsorsService } from './sponsors.service';
 
-@Controller('news')
-export class NewsController {
-  constructor(private newsService: NewsService) {}
+@Controller('sponsors')
+export class SponsorsController {
+  constructor(private sponsorService: SponsorsService) {}
 
   @Post()
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './assets/news',
+        destination: './assets/sponsors',
         filename: (req, file, cb) => {
           const fileName: string = parse(file.originalname).name.replace(
             /\s/g,
@@ -41,31 +41,31 @@ export class NewsController {
   )
   create(
     @UploadedFile() file: Express.Multer.File,
-    @Body() createNewsDto: NewsDto,
-  ): Promise<Observable<News>> {
-    return this.newsService.create(file, createNewsDto);
+    @Body() createSponsorDto: SponsorsDto,
+  ): Promise<Observable<Sponsors>> {
+    return this.sponsorService.create(file, createSponsorDto);
   }
 
   @Get()
   findAll() {
-    return this.newsService.findAll();
+    return this.sponsorService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.newsService.findOne(+id);
+    return this.sponsorService.findOne(+id);
   }
 
   @Get(':id/image')
   findImage(@Param('id') id: string, @Res() res) {
-    return this.newsService.findImage(+id, res);
+    return this.sponsorService.findImage(+id, res);
   }
 
   @Patch(':id')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './assets/news',
+        destination: './assets/sponsors',
         filename: (req, file, cb) => {
           const fileName: string = parse(file.originalname).name.replace(
             /\s/g,
@@ -81,13 +81,13 @@ export class NewsController {
   update(
     @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
-    @Body() updateNewsDto: UpdateNewsDto,
+    @Body() updateSponsorsDto: SponsorsDto,
   ) {
-    return this.newsService.update(+id, updateNewsDto, file);
+    return this.sponsorService.update(+id, updateSponsorsDto, file);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.newsService.remove(+id);
+    return this.sponsorService.remove(+id);
   }
 }

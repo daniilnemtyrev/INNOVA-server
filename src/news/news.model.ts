@@ -20,7 +20,7 @@ export class News extends Model<News, NewsCreationOptions> {
   @Column({ type: DataType.STRING, unique: false, allowNull: false })
   title: string;
 
-  @Column({ type: DataType.STRING, unique: false, allowNull: false })
+  @Column({ type: 'longtext', unique: false, allowNull: false })
   text: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
