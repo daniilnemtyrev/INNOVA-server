@@ -18,6 +18,7 @@ export class TeamsService {
   async createTeam(dto: CreateTeamDto) {
     const team = await this.teamRepository.create({
       name: dto.name,
+      creatorId: dto.userId,
     });
     await this.usersService.setTeam({ teamId: team.id, userId: dto.userId });
     return team;

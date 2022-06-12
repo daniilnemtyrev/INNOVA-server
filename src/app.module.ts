@@ -25,6 +25,10 @@ import { Timetable } from './timetable/timetable.model';
 import { NewsModule } from './news/news.module';
 import { News } from './news/news.model';
 import { SponsorsModule } from './sponsors/sponsors.module';
+import { InvitesModule } from './invite/invite.module';
+import { Invite } from './invite/invite.model';
+import { TasksModule } from './tasks/tasks.module';
+import { Tasks } from './tasks/tasks.model';
 
 @Module({
   controllers: [],
@@ -41,6 +45,7 @@ import { SponsorsModule } from './sponsors/sponsors.module';
       password: 'q1w2e3r4t5',
       database: 'a45359_innova3',
       models: [
+        Tasks,
         News,
         User,
         Token,
@@ -53,6 +58,7 @@ import { SponsorsModule } from './sponsors/sponsors.module';
         Team,
         Timetable,
         Sponsors,
+        Invite,
       ],
       autoLoadModels: true,
     }),
@@ -67,6 +73,8 @@ import { SponsorsModule } from './sponsors/sponsors.module';
     TimetableModule,
     NewsModule,
     SponsorsModule,
+    InvitesModule,
+    TasksModule,
   ],
 })
 export class AppModule {}

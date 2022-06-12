@@ -14,6 +14,7 @@ import { User } from 'src/users/users.model';
 
 interface TeamCreationOptions {
   name: string;
+  creatorId: number;
 }
 
 interface UserTeam {
@@ -34,6 +35,9 @@ export class Team extends Model<Team, TeamCreationOptions> {
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   name: string;
+
+  @Column({ type: DataType.INTEGER, unique: true, allowNull: false })
+  creatorId: number;
 
   @HasOne(() => Project)
   project: Project;

@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { Invite } from 'src/invite/invite.model';
 import { Project } from 'src/projects/project.model';
 
 import { Role } from 'src/roles/roles.model';
@@ -8,6 +9,7 @@ import { Team } from 'src/teams/teams.model';
 import { BanUserDto } from './dto/ban-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
+import { RemoveUserTeamDto } from './dto/remove-user-team.dto';
 import { SetProjectDto } from './dto/set-project.dto';
 import { SetTeamDto } from './dto/set-team.dto';
 import { UpdReqStatusDto } from './dto/upd-req-status.dto';
@@ -61,6 +63,20 @@ export class UsersService {
     return { data: [...users], total: users.length };
   }
 
+  async getConfirmedUsers() {
+    const users = await this.userRepository.findAll({
+      where: { request_status: 'Подтвержден', teamId: null },
+    });
+
+    const defaultUsers = await this.roleService.getDefaultUsers();
+
+    const confirmedUsers = defaultUsers.map((defaultUser) =>
+      users.find((user) => defaultUser.userId === user.id),
+    );
+
+    return confirmedUsers;
+  }
+
   async deleteUserById(id: number) {
     await this.userRepository.destroy({
       where: { id },
@@ -86,6 +102,7 @@ export class UsersService {
         { model: Project, attributes: ['id', 'name'] },
         { model: Team, attributes: ['id', 'name'] },
         { model: Role, attributes: ['value'] },
+        { model: Invite },
       ],
     });
     return user;
@@ -115,6 +132,14 @@ export class UsersService {
     const user = await this.userRepository.findByPk(dto.userId);
     await user.update({
       projectId: dto.projectId,
+    });
+  }
+
+  async removeUserTeam(dto: RemoveUserTeamDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    await user.update({
+      projectId:null,
+      teamId: null,
     });
   }
 
