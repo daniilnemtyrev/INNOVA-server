@@ -122,7 +122,6 @@ export class UsersService {
 
   async setTeam(dto: SetTeamDto) {
     const user = await this.userRepository.findByPk(dto.userId);
-
     await user.update({
       teamId: dto.teamId,
     });
@@ -138,6 +137,7 @@ export class UsersService {
   async removeUserTeam(dto: RemoveUserTeamDto) {
     const user = await this.userRepository.findByPk(dto.userId);
     await user.update({
+      projectId:null,
       teamId: null,
     });
   }

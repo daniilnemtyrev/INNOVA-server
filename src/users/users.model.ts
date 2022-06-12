@@ -99,6 +99,9 @@ export class User extends Model<User, UserCreationOptions> {
   @Column({ type: DataType.INTEGER, allowNull: true })
   teamId: number;
 
+  @Column({ type: DataType.INTEGER, unique: false, allowNull: true  })
+  points: number;
+
   @BelongsTo(() => Team)
   team: Team;
 }

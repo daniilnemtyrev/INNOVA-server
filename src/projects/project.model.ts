@@ -9,6 +9,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Case } from 'src/cases/cases.model';
+import { Tasks } from 'src/tasks/tasks.model';
 import { Team } from 'src/teams/teams.model';
 import { Track } from 'src/tracks/tracks.model';
 import { User } from 'src/users/users.model';
@@ -82,6 +83,9 @@ export class Project extends Model<Project, ProjectCreationOptions> {
 
   @BelongsTo(() => Team)
   team: Team;
+  
+  @HasMany(() => Tasks)
+  tasks: Tasks[];
 
   @HasMany(() => User)
   users: User[];

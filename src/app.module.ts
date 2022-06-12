@@ -25,6 +25,8 @@ import { NewsModule } from './news/news.module';
 import { News } from './news/news.model';
 import { InvitesModule } from './invite/invite.module';
 import { Invite } from './invite/invite.model';
+import { TasksModule } from './tasks/tasks.module';
+import { Tasks } from './tasks/tasks.model';
 
 @Module({
   controllers: [],
@@ -41,6 +43,7 @@ import { Invite } from './invite/invite.model';
       password: 'q1w2e3r4t5',
       database: 'a45359_innova3',
       models: [
+        Tasks,
         News,
         User,
         Token,
@@ -67,6 +70,7 @@ import { Invite } from './invite/invite.model';
     TimetableModule,
     NewsModule,
     InvitesModule,
+    TasksModule,
   ],
 })
 export class AppModule {}
