@@ -22,6 +22,6 @@ export class Timetable extends Model<Timetable, TimetableCreationOptions> {
   @Column({ type: DataType.DATE, unique: false, allowNull: false })
   start: Date;
 
-  @Column({ type: DataType.DATE, unique: false, allowNull: false })
+  @Column({ type: DataType.DATE, unique: false, allowNull: true })
   end: Date;
 }

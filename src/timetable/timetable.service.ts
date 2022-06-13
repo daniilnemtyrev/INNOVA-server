@@ -1,25 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { TimetableDto } from './dto/timetable.dto';
+import { Timetable } from './timetable.model';
 
 @Injectable()
 export class TimetableService {
-  create(createTimetableDto: TimetableDto) {
-    return 'This action adds a new timetable';
+  constructor(@InjectModel(Timetable) private timeTableRepository: typeof Timetable,
+) {}
+  async create(createTimetableDto: TimetableDto) {
+    const event = await this.timeTableRepository.create(createTimetableDto);
+    return event;
   }
 
-  findAll() {
-    return `This action returns all timetable`;
+  async findAll() {
+    const events = await this.timeTableRepository.findAll();
+    return { data: [...events], total: events.length };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} timetable`;
+  async findOne(id: number) {
+    const event = await this.timeTableRepository.findByPk(id);
+    return event;
   }
 
-  update(id: number, updateTimetableDto: TimetableDto) {
-    return `This action updates a #${id} timetable`;
+  async update(id: number, updateTimetableDto: TimetableDto) {
+    const event = await this.timeTableRepository.findByPk(id);
+
+    await event.update({
+      ...updateTimetableDto
+    });
+    return event;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} timetable`;
+  async remove(id: number) {
+    await this.timeTableRepository.destroy({ where: { id } });
   }
 }
