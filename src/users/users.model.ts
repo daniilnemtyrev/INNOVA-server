@@ -14,6 +14,7 @@ import { Invite } from 'src/invite/invite.model';
 import { Project } from 'src/projects/project.model';
 import { Role } from 'src/roles/roles.model';
 import { UserRoles } from 'src/roles/user-roles.model';
+import { Tasks } from 'src/tasks/tasks.model';
 import { Team } from 'src/teams/teams.model';
 import { Token } from 'src/tokens/tokens.model';
 
@@ -107,4 +108,6 @@ export class User extends Model<User, UserCreationOptions> {
 
   @BelongsToMany(()=>Team,() => Invite)
   invites: Invite[];
+  @HasMany(() => Tasks)
+  tasks: Tasks[];
 }

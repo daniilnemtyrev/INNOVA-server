@@ -33,7 +33,7 @@ export class Case extends Model<Case, CaseCreationOptions> {
   @Column({ type: DataType.INTEGER, allowNull: true })
   trackId: number;
 
-  @Column({ type: DataType.STRING, allowNull: true })
+  @Column({ type: 'longtext', allowNull: true })
   description: string;
 
   @BelongsTo(() => Track)

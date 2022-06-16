@@ -1,10 +1,10 @@
 import {
   BelongsTo,
-  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from 'sequelize-typescript';
@@ -83,9 +83,9 @@ export class Project extends Model<Project, ProjectCreationOptions> {
 
   @BelongsTo(() => Team)
   team: Team;
-  
-  @HasMany(() => Tasks)
-  tasks: Tasks[];
+
+  @HasOne(() => Tasks)
+  task: Tasks;
 
   @HasMany(() => User)
   users: User[];
