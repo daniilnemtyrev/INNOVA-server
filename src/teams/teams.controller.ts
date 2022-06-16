@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { GetTeamDto } from './dto/get-team.dto';
 
@@ -16,5 +16,9 @@ export class TeamsController {
   @Post('/get')
   get(@Body() getDto: GetTeamDto) {
     return this.teamsService.getTeam(getDto);
+  }
+    @Get('/getAll')
+  getAll() {
+    return this.teamsService.getAllTeams();
   }
 }

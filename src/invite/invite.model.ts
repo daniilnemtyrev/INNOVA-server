@@ -3,9 +3,12 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Role } from 'src/roles/roles.model';
+import { Team } from 'src/teams/teams.model';
 import { User } from 'src/users/users.model';
 
 interface InviteCreationOptions {
@@ -28,12 +31,10 @@ export class Invite extends Model<Invite, InviteCreationOptions> {
   @Column({ type: DataType.INTEGER, allowNull: false })
   invitedUserId: number;
 
+  @ForeignKey(() => Team)
   @Column({ type: DataType.INTEGER, allowNull: false })
   teamId: number;
 
   @Column({ type: DataType.STRING, allowNull: false })
   senderName: string;
-
-  @BelongsTo(() => User)
-  user: User;
 }

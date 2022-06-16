@@ -17,7 +17,7 @@ import { SetProjectDto } from './dto/set-project.dto';
 import { SetTeamDto } from './dto/set-team.dto';
 import { UpdReqStatusDto } from './dto/upd-req-status.dto';
 import { User } from './users.model';
-
+import {ChangePointsDto} from './dto/change-points-dto'
 @Injectable()
 export class UsersService {
   constructor(
@@ -158,6 +158,14 @@ export class UsersService {
     await user.update({
       projectId:null,
       teamId: null,
+    });
+  }
+
+
+    async changePoints(dto: ChangePointsDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    await user.update({
+      points: dto.points,
     });
   }
 

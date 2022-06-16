@@ -91,10 +91,7 @@ export class User extends Model<User, UserCreationOptions> {
 
   @HasMany(() => Messages)
   messages: Messages[];
-
-  @HasMany(() => Invite)
-  invites: Invite[];
-
+  
   @HasOne(() => Token)
   token: Token;
 
@@ -107,4 +104,7 @@ export class User extends Model<User, UserCreationOptions> {
 
   @BelongsTo(() => Team)
   team: Team;
+
+  @BelongsToMany(()=>Team,() => Invite)
+  invites: Invite[];
 }

@@ -27,11 +27,14 @@ export class TeamsService {
   async getTeam(dto: GetTeamDto) {
     const team = await this.teamRepository.findByPk(dto.id, {
       include: [
-        { model: User, attributes: ['id', 'name', 'surname'] },
+        { model: User, attributes: ['id', 'name', 'surname','points'] },
         { model: Project, attributes: ['id', 'name'] },
       ],
     });
-
-    return team;
+        return team;
   }
+      async getAllTeams(){
+      const teams = await this.teamRepository.findAll();
+      return teams;
+}
 }

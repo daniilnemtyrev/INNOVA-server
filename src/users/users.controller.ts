@@ -19,6 +19,7 @@ import { News } from 'src/news/news.model';
 import { Roles } from 'src/roles/roles-auth.decorator';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { BanUserDto } from './dto/ban-user.dto';
+import { ChangePointsDto } from './dto/change-points-dto';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { GiveRoleDto } from './dto/give-role.dto';
@@ -108,6 +109,10 @@ export class UsersController {
   @Get('/requests')
   getUsersByRequest() {
     return this.userService.getFiltredUsers();
+  }
+    @Post('/changePoints')
+  changePoints(@Body() changePointsDto: ChangePointsDto) {
+    return this.userService.changePoints(changePointsDto);
   }
 
   @Get(':id')

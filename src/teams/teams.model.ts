@@ -1,5 +1,6 @@
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -8,6 +9,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Invite } from 'src/invite/invite.model';
 import { Project } from 'src/projects/project.model';
 
 import { User } from 'src/users/users.model';
@@ -44,4 +46,7 @@ export class Team extends Model<Team, TeamCreationOptions> {
 
   @HasMany(() => User)
   users: UserTeam[];
+  
+  @BelongsToMany(()=>User,() => Invite)
+  invites: Invite[];
 }
